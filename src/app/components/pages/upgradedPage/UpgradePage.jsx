@@ -200,7 +200,7 @@ const UpgradePage = () => {
                   {/* <button className="Montserrat400 w-full text-[16px] py-[14.5px] pr-[7px]  font-[400] leading-normal text-[#121212] bg-[#D9D9D9]">
                     GOOGLE VERIFICATION
                   </button> */}
-                  <ReCAPTCHA sitekey="6Le4i5coAAAAAN7jXBqhGCFIbUKPKbgkhd4tb4Sm" />
+                  <ReCAPTCHA sitekey="6Lcus5coAAAAAGKNpOQoYKXF--sAecCJ0gW_BEeW" />
                 </div>
               )}
               <>
