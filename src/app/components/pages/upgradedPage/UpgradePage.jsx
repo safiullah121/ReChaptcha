@@ -196,10 +196,7 @@ const UpgradePage = () => {
                 )}
               </div>
               {userData == null && (
-                <div className=" w-fit pb-[17px] sm:pt-[15px] pt-[29px]">
-                  {/* <button className="Montserrat400 w-full text-[16px] py-[14.5px] pr-[7px]  font-[400] leading-normal text-[#121212] bg-[#D9D9D9]">
-                    GOOGLE VERIFICATION
-                  </button> */}
+                <div className=" w-fit pb-[17px] sm:pt-[15px] pt-[29px] mx-auto">
                   <ReCAPTCHA sitekey="6Lcus5coAAAAAGKNpOQoYKXF--sAecCJ0gW_BEeW" />
                 </div>
               )}
