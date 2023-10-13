@@ -113,20 +113,20 @@ const UpgradePage = () => {
 
   return (
     <>
+      {detailsToggle == 1 ? (
+        <PremiumDetails />
+      ) : (
+        detailsToggle == 2 && <VerificationDetails />
+      )}
       <Layout>
         <ToastContainer />
-        {detailsToggle == 1 ? (
-          <PremiumDetails />
-        ) : (
-          detailsToggle == 2 && <VerificationDetails />
-        )}
         <div
           className={`max-w-[900px] w-full ${
             // premiumDetails == true
             //   ? " pt-[38px] sm:pt-[44px]"
             //   :
             "lg:pt-[30px] pt-[64px]"
-          }  rounded-[10px] dropShadow`}
+          }  rounded-[10px] dropShadow  -z-10`}
         >
           <img src="/img/sparrow.svg" alt="" className="mx-auto " />
           {stage == 4 ? (
