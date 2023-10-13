@@ -5,9 +5,9 @@ import MyContext from "../../Context";
 import { useElements, useStripe } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import {
-  // CardCvcElement,
-  // CardExpiryElement,
-  // CardNumberElement,
+  CardCvcElement,
+  CardExpiryElement,
+  CardNumberElement,
   CardElement,
 } from "@stripe/react-stripe-js";
 
@@ -21,7 +21,6 @@ const Payment = () => {
   const { stage, setstage } = useContext(MyContext);
   const [userPaymentData, setuserPaymentData] = useState(null);
 
-  
   const handlePayment = async (e) => {
     e.preventDefault();
 
@@ -64,11 +63,10 @@ const Payment = () => {
             stage == 3 ? "text-[#262F61]" : "text-[#D3D4D9]"
           } mb-[39px]`}
         >
-          {/* 3. ENTER YOUR PAYMENT DETAILS */}
-          {/* {userPaymentData} */}
+          3. ENTER YOUR PAYMENT DETAILS
         </h1>
         <form onSubmit={handlePayment}>
-          {/* <div className="flex flex-col gap-[13px] pb-[34px]">
+          <div className="flex flex-col gap-[13px] pb-[34px]">
             <CardNumberElement
               // className="border-solid border-[1px] border-[#D3D4D9] rounded-[5px] h-[50px] text-[16px] font-[400] leading-normal   text-[#D3D4D9] pt-[16px] pl-[18px] w-full"
               options={{
@@ -132,8 +130,7 @@ const Payment = () => {
               background={stage == 3 ? "bg-[#3490EC]" : "bg-[#D3D4D9]"}
               onClick={handlePayment}
             />
-          </div> */}
-          <CardElement />
+          </div>
         </form>
         <div className="flex items-center justify-center  sm:pb-[74px] pb-[71px]">
           <p className="Montserrat400 text-[12px] font-[400] leading-normal pb-[2px] text-[#D3D4D9]">

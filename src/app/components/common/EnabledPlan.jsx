@@ -12,6 +12,7 @@ const EnabledPlan = () => {
       title: "GET VERIFIED",
       desce: "Verify your Verbyo profile, so we will know that you are real.",
       durations: "billed monthly",
+      price: "$2.99",
     },
     {
       id: "price_1Nw8aTAPvJWLdjhBfpkXeUWy",
@@ -19,6 +20,7 @@ const EnabledPlan = () => {
       title: "PREMIUM USER",
       desce: "More offers, better paid  offers, more benefits and  much more.",
       durations: "billed monthly",
+      price: "$24.99",
     },
     {
       id: "price_1Nw8bHAPvJWLdjhBjMQWVM9E",
@@ -26,6 +28,7 @@ const EnabledPlan = () => {
       title: "YEARLY PLAN",
       desce: "Get all premium benefits for the whole year.",
       durations: "billed yearly",
+      price: "$59.99",
     },
     {
       id: "price_1Nw8bzAPvJWLdjhBZBJkbmDC",
@@ -33,6 +36,7 @@ const EnabledPlan = () => {
       title: "LIFETIME PREMIUM",
       desce: "Verify your Verbyo profile, so we will know that you are real.",
       durations: "billed once in a lifetime",
+      price: "$99.99",
     },
   ]);
 
@@ -97,9 +101,7 @@ const EnabledPlan = () => {
                     {item.desce}
                   </p>
                   <h1 className="Montserrat700 text-[14px] leading-normal font-[700] text-[#030303] pb-[6px]">
-                    {stripeData.data.find((i) => i.id === item.id).unit_amount /
-                      100 +
-                      "$"}
+                    {item.price}
                   </h1>
                   <p className="Montserrat400 text-[12px] leading-normal font-[400] text-[#262F61] ">
                     {item.durations}

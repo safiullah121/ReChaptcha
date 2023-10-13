@@ -11,6 +11,8 @@ import VerificationDetails from "./VerificationDetails";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import ReCAPTCHA from "react-google-recaptcha";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const stripePromise = loadStripe(
   "pk_test_51NxrYAAXhB9B84pkKtvLeQjACOpwXlgjFsbrrzNT8EakVFTYN3myJUGSvk7rZmR2Da1xZzjIpN9peLH9Oq2Fb7KW00KxPekpDM"
@@ -49,7 +51,7 @@ const UpgradePage = () => {
   ]);
 
   const [inputVal, setinputVal] = useState("");
-  const [buttonText, setbuttonText] = useState(false);
+  const [reCaptchaCheck, setreCaptchaCheck] = useState(false);
   const {
     stage,
     setstage,
@@ -74,40 +76,51 @@ const UpgradePage = () => {
   useEffect(() => {
     data();
   }, []);
+  const handleCaptchaChange = () => {
+    e.preventDefault();
 
+    if (!recaptchaValue) {
+      setreCaptchaCheck(false);
+    } else {
+      setreCaptchaCheck(true);
+    }
+  };
   const handleButtonClick = async () => {
-    const data = { email: inputVal };
-    // Make a POST request to the API
-    await fetch("https://verbyo.com/api/upgrade-app/check-account", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "x-api-key": "e0d7a5baa8dd0739fee60e3c1bdfa696",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((response) => response.json())
-      .then((result) => {
-        if (result.user) {
-          setuserData(result.user);
-        } else {
-          setuserData("No User");
-        }
+    if (reCaptchaCheck == true) {
+      const data = { email: inputVal };
+      // Make a POST request to the API
+      await fetch("https://verbyo.com/api/upgrade-app/check-account", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-api-key": "e0d7a5baa8dd0739fee60e3c1bdfa696",
+        },
+        body: JSON.stringify(data),
       })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-    // else if (stage == 2) {
-    //   setstage(3);
-    // }
-    if (userData !== "No User" && userData !== null) {
-      setstage(2);
+        .then((response) => response.json())
+        .then((result) => {
+          if (result.user) {
+            setuserData(result.user);
+          } else {
+            setuserData("No User");
+          }
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+
+      if (userData !== "No User" && userData !== null) {
+        setstage(2);
+      }
+    } else {
+      toast.error("Please Complete Captcha");
     }
   };
 
   return (
     <>
       <Layout>
+        <ToastContainer />
         {detailsToggle == 1 ? (
           <PremiumDetails />
         ) : (
@@ -197,7 +210,10 @@ const UpgradePage = () => {
               </div>
               {userData == null && (
                 <div className=" w-fit pb-[17px] sm:pt-[15px] pt-[29px] mx-auto">
-                  <ReCAPTCHA sitekey="6Lcus5coAAAAAGKNpOQoYKXF--sAecCJ0gW_BEeW" />
+                  <ReCAPTCHA
+                    sitekey="6Lcus5coAAAAAGKNpOQoYKXF--sAecCJ0gW_BEeW"
+                    onChange={handleCaptchaChange}
+                  />
                 </div>
               )}
               <>
