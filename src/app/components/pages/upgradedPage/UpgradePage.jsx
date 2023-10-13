@@ -51,7 +51,7 @@ const UpgradePage = () => {
   ]);
 
   const [inputVal, setinputVal] = useState("");
-  const [reCaptchaCheck, setreCaptchaCheck] = useState(false);
+  const [reCaptchaCheck, setreCaptchaCheck] = useState(null);
   const {
     stage,
     setstage,
@@ -76,17 +76,11 @@ const UpgradePage = () => {
   useEffect(() => {
     data();
   }, []);
-  const handleCaptchaChange = () => {
-    e.preventDefault();
-
-    if (!recaptchaValue) {
-      setreCaptchaCheck(false);
-    } else {
-      setreCaptchaCheck(true);
-    }
+  const handleCaptchaChange = (value) => {
+    setreCaptchaCheck(value);
   };
   const handleButtonClick = async () => {
-    if (reCaptchaCheck == true) {
+    if (reCaptchaCheck) {
       const data = { email: inputVal };
       // Make a POST request to the API
       await fetch("https://verbyo.com/api/upgrade-app/check-account", {
