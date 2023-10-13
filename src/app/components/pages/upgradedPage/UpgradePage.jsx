@@ -81,6 +81,7 @@ const UpgradePage = () => {
   };
   const handleButtonClick = async () => {
     // if (reCaptchaCheck) {
+
     const data = { email: inputVal };
     // Make a POST request to the API
     await fetch("https://verbyo.com/api/upgrade-app/check-account", {
@@ -107,7 +108,7 @@ const UpgradePage = () => {
       setstage(2);
     }
     // } else {
-    // toast.error("Please Complete Captcha");
+    //   toast.error("Please Complete Captcha");
     // }
   };
 

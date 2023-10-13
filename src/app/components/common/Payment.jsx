@@ -23,7 +23,6 @@ const Payment = () => {
 
   const handlePayment = async (e) => {
     e.preventDefault();
-
     // Fetch the client secret from your server
     const { clientSecret } = await fetch("/api/payment", {
       method: "POST",
@@ -55,6 +54,9 @@ const Payment = () => {
       console.error(error);
     } else {
       // Payment has been confirmed successfully
+    }
+    if (stage == 3) {
+      setstage(4);
     }
     console.log(clientSecret);
   };
