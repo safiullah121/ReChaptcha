@@ -41,7 +41,11 @@ const Payment = () => {
       clientSecret,
       {
         payment_method: {
-          card: elements.getElement(CardElement), // Make sure CardElement is defined
+          card: elements.getElement(
+            CardNumberElement,
+            CardExpiryElement,
+            CardCvcElement
+          ), // Make sure CardElement is defined
         },
       }
     );
