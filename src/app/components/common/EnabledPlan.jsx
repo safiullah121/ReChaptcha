@@ -124,6 +124,7 @@ const EnabledPlan = () => {
               </div>
               {item.title == "GET VERIFIED" || item.title == "PREMIUM USER" ? (
                 <p
+                  id="verification"
                   onClick={
                     item.title == "GET VERIFIED"
                       ? () => {
