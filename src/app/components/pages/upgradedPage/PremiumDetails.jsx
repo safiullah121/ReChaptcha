@@ -1,7 +1,8 @@
 "use client";
-import { useContext } from "react";
+import { useContext, useRef, useEffect } from "react";
 import CustomButton from "@/app/components/common/CustomButton";
 import MyContext from "@/app/Context";
+import OutsideClickHandler from "react-outside-click-handler/build/OutsideClickHandler";
 
 const PremiumDetails = () => {
   const {
@@ -10,6 +11,26 @@ const PremiumDetails = () => {
     detailsToggle,
     setdetailsToggle,
   } = useContext(MyContext);
+  const premiumDetails = useRef(null);
+  // useEffect(() => {
+  //   function handleClickOutside(event) {
+  //     if (
+  //       premiumDetails.current &&
+  //       !premiumDetails.current.contains(event.target)
+  //     ) {
+  //       setdetailsToggle(0);
+  //     }
+  //   }
+
+  //   // Add event listener when the component mounts
+  //   document.addEventListener("mousedown", handleClickOutside);
+
+  //   // Clean up the event listener when the component unmounts
+  //   return () => {
+  //     document.removeEventListener("mousedown", handleClickOutside);
+  //   };
+  // }, [premiumDetails]);
+
   const permiumDetails = [
     {
       src: "/img/EnabledVerified.svg",
@@ -64,54 +85,67 @@ const PremiumDetails = () => {
     },
   ];
   return (
-    <div className="fixed translate-y-0 top-0 w-full h-full overflow-y-auto  z-20 scrollbar-hide py-[60px] bg-[#000000] bg-opacity-[0.4]">
-      <div className="relative flex justify-center w-full   z-20 ">
-        <div className="sm:pb-[75px] fixed bg-white max-w-[900px] w-full dropShadow mt-[10px] rounded-[20px]">
-          <img src="/img/sparrow.svg" alt="" className="mx-auto mt-[34px]" />
-          <h1 className="Montserrat700 hidden sm:block sm:text-[20px] text-[18px] font-[700] leading-normal text-[#262F61] text-center sm:mt-[30px] mt-[21px]">
-            Use the discounted packages below to upgrade your account.
-          </h1>
-          <h1 className="Montserrat700 block sm:hidden sm:text-[20px] text-[18px] font-[700] leading-normal text-[#262F61] text-center sm:mt-[30px] mt-[21px]">
-            VERBYO PREMIUM ACCOUNT <br className="block sm:hidden" /> BENEFITS
-          </h1>
-          <p className="Montserrat400 sm:text-[16px] text-[14px] font-[400] leading-normal text-[#474747] text-center sm:mt-[20px] mt-[27px]">
-            Verify your account with Verbyo and{" "}
-            <br className="block sm:hidden" /> demonstrate that you are a real
-            person.
-            <br />
-            <span className="Montserrat600 sm:block hidden sm:text-[16px] text-[14px] font-[600] leading-normal text-[#000] text-center">
-              15% discount applied to all plans.
-            </span>
-          </p>
-          <div className="flex flex-wrap max-w-[640px] w-full justify-between sm:gap-y-[14px] gap-y-[27px] gap-x-[20px] sm:pt-[56px] pt-[27px] pb-[62px] mx-auto">
-            {permiumDetails.map((i, index) => (
-              <div
-                key={index + "premiumDetails"}
-                className={` ${i.className2} sm:pt-[15px] pb-[41px] pl-[16px] pr-[10px] sm:max-w-[200px] max-w-[331px] w-full border-[1px] border-solid border-[#EEE] rounded-[5px] h-[220px] md:mx-0 mx-auto`}
-              >
-                <div className="mx-auto w-fit">
-                  <img src={i.src} alt="" />
-                </div>
-                <h1 className="Montserrat700 text-center text-[14px] font-[700] leading-normal text-[#262F61] mt-[14.5px]">
-                  {i.title}
-                </h1>
-                <p
-                  className={` Montserrat400 mx-auto text-center text-[14px] font-[400] leading-normal text-[#474747] ${i.className}`}
+    <div
+      className={`${
+        detailsToggle == 1 ? "opacity-1 fixed scale-70 pt-[60px]" : " scale-0"
+      }  translate-y-0 top-0 w-full h-full overflow-y-auto  z-20 scrollbar-hide  bg-[#000000] bg-opacity-[0.4] transition-all ease-in-out duration-[1s]`}
+    >
+      <OutsideClickHandler
+        onOutsideClick={() => {
+          setdetailsToggle(0);
+        }}
+      >
+        <div
+          className="relative flex justify-center w-full   z-20 "
+          // ref={premiumDetails}
+        >
+          <div className="sm:pb-[75px] fixed bg-white max-w-[900px] w-full dropShadow mt-[10px] rounded-[20px]">
+            <img src="/img/sparrow.svg" alt="" className="mx-auto mt-[34px]" />
+            <h1 className="Montserrat700 hidden sm:block sm:text-[20px] text-[18px] font-[700] leading-normal text-[#262F61] text-center sm:mt-[30px] mt-[21px]">
+              Use the discounted packages below to upgrade your account.
+            </h1>
+            <h1 className="Montserrat700 block sm:hidden sm:text-[20px] text-[18px] font-[700] leading-normal text-[#262F61] text-center sm:mt-[30px] mt-[21px]">
+              VERBYO PREMIUM ACCOUNT <br className="block sm:hidden" /> BENEFITS
+            </h1>
+            <p className="Montserrat400 sm:text-[16px] text-[14px] font-[400] leading-normal text-[#474747] text-center sm:mt-[20px] mt-[27px]">
+              Verify your account with Verbyo and{" "}
+              <br className="block sm:hidden" /> demonstrate that you are a real
+              person.
+              <br />
+              <span className="Montserrat600 sm:block hidden sm:text-[16px] text-[14px] font-[600] leading-normal text-[#000] text-center">
+                15% discount applied to all plans.
+              </span>
+            </p>
+            <div className="flex flex-wrap max-w-[640px] w-full justify-between sm:gap-y-[14px] gap-y-[27px] gap-x-[20px] sm:pt-[56px] pt-[27px] pb-[62px] mx-auto">
+              {permiumDetails.map((i, index) => (
+                <div
+                  key={index + "premiumDetails"}
+                  className={` ${i.className2} sm:pt-[15px] pb-[41px] pl-[16px] pr-[10px] sm:max-w-[200px] max-w-[331px] w-full border-[1px] border-solid border-[#EEE] rounded-[5px] h-[220px] md:mx-0 mx-auto`}
                 >
-                  {i.desce}
-                </p>
-              </div>
-            ))}
+                  <div className="mx-auto w-fit">
+                    <img src={i.src} alt="" />
+                  </div>
+                  <h1 className="Montserrat700 text-center text-[14px] font-[700] leading-normal text-[#262F61] mt-[14.5px]">
+                    {i.title}
+                  </h1>
+                  <p
+                    className={` Montserrat400 mx-auto text-center text-[14px] font-[400] leading-normal text-[#474747] ${i.className}`}
+                  >
+                    {i.desce}
+                  </p>
+                </div>
+              ))}
+            </div>
+            <CustomButton
+              text="CLOSE"
+              background="bg-[#3490EC]"
+              onClick={() => {
+                setdetailsToggle(0);
+              }}
+            />
           </div>
-          <CustomButton
-            text="CLOSE"
-            background="bg-[#3490EC]"
-            onClick={() => {
-              setdetailsToggle(0);
-            }}
-          />
         </div>
-      </div>
+      </OutsideClickHandler>
     </div>
   );
 };
