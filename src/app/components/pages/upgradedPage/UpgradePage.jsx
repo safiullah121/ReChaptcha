@@ -80,36 +80,35 @@ const UpgradePage = () => {
     setreCaptchaCheck(value);
   };
   const handleButtonClick = async () => {
-    // if (reCaptchaCheck) {
-
-    const data = { email: inputVal };
-    // Make a POST request to the API
-    await fetch("https://verbyo.com/api/upgrade-app/check-account", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "x-api-key": "e0d7a5baa8dd0739fee60e3c1bdfa696",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((response) => response.json())
-      .then((result) => {
-        if (result.user) {
-          setuserData(result.user);
-        } else {
-          setuserData("No User");
-        }
+    if (reCaptchaCheck) {
+      const data = { email: inputVal };
+      // Make a POST request to the API
+      await fetch("https://verbyo.com/api/upgrade-app/check-account", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-api-key": "e0d7a5baa8dd0739fee60e3c1bdfa696",
+        },
+        body: JSON.stringify(data),
       })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+        .then((response) => response.json())
+        .then((result) => {
+          if (result.user) {
+            setuserData(result.user);
+          } else {
+            setuserData("No User");
+          }
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
 
-    if (userData !== "No User" && userData !== null) {
-      setstage(2);
+      if (userData !== "No User" && userData !== null) {
+        setstage(2);
+      }
+    } else {
+      toast.error("Please Complete Captcha");
     }
-    // } else {
-    //   toast.error("Please Complete Captcha");
-    // }
   };
 
   return (
