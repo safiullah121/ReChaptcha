@@ -13,6 +13,7 @@ const EnabledPlan = () => {
       desce: "Verify your Verbyo profile, so we will know that you are real.",
       durations: "billed monthly",
       price: "$2.99",
+      window: "verification",
     },
     {
       id: "price_1Nw8aTAPvJWLdjhBfpkXeUWy",
@@ -21,6 +22,7 @@ const EnabledPlan = () => {
       desce: "More offers, better paid  offers, more benefits and  much more.",
       durations: "billed monthly",
       price: "$24.99",
+      window: "premium",
     },
     {
       id: "price_1Nw8bHAPvJWLdjhBjMQWVM9E",
@@ -124,7 +126,7 @@ const EnabledPlan = () => {
               </div>
               {item.title == "GET VERIFIED" || item.title == "PREMIUM USER" ? (
                 <p
-                  id="verification"
+                  id={item.window}
                   onClick={
                     item.title == "GET VERIFIED"
                       ? () => {

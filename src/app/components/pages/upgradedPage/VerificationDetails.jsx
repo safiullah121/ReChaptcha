@@ -5,7 +5,14 @@ import { useContext, useRef, useEffect } from "react";
 
 const VerificationDetails = () => {
   const { detailsToggle, setdetailsToggle } = useContext(MyContext);
-
+  useEffect(() => {
+    window.addEventListener("click", (e) => {
+      if (e.target.id !== "verification" && e.target.id !== "premium") {
+        setdetailsToggle(0);
+        console.log(e.target);
+      }
+    });
+  }, []);
   return (
     <div
       className={`translate-y-0  ${
@@ -19,7 +26,7 @@ const VerificationDetails = () => {
         // ref={verificationRef}
       >
         <div
-          id="premium"
+          id="verification"
           className={`fixed bg-white  max-w-[900px] w-full dropShadow mt-[10px] rounded-[20px]`}
         >
           <img src="/img/sparrow.svg" alt="" className="mx-auto mt-[31px]" />
@@ -32,10 +39,10 @@ const VerificationDetails = () => {
             person.
           </p>
           <div
-            id="premium"
+            id="verification"
             className="sm:max-w-[400px] max-w-[332px] w-full mx-auto sm:mt-[42px] mt-[27px] sm:pt-[15px] pt-[24px] sm:pb-[50px] pb-[31px] sm:pl-[36px] pl-[21px] sm:pr-[27px] pr-[25px] border-[1px] border-solid border-[#EEE] sm:mb-[62px] mb-[51px]"
           >
-            <div id="premium" className="mx-auto w-fit">
+            <div id="verification" className="mx-auto w-fit">
               <img src="/img/EnabledVerified.svg" alt="" />
             </div>
             <h1 className="Montserrat700 text-[14px] text-center text-[#262F61] font-[700] leading-normal sm:mt-[14px] mt-[13px]">

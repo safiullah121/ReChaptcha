@@ -10,11 +10,11 @@ const PremiumDetails = () => {
     detailsToggle,
     setdetailsToggle,
   } = useContext(MyContext);
-  const premiumDetails = useRef(null);
   useEffect(() => {
     window.addEventListener("click", (e) => {
-      if (e.target.id !== "verification") {
+      if (e.target.id !== "premium" && e.target.id !== "verification") {
         setdetailsToggle(0);
+        console.log(e.target);
       }
     });
   }, []);
@@ -81,10 +81,10 @@ const PremiumDetails = () => {
       <div
         className="relative flex justify-center w-full   z-20 "
         // ref={premiumDetails}
-        id="verification"
+        id="premium"
       >
         <div
-          id="verification"
+          id="premium"
           className="sm:pb-[75px] fixed bg-white max-w-[900px] w-full dropShadow mt-[10px] rounded-[20px]"
         >
           <img src="/img/sparrow.svg" alt="" className="mx-auto mt-[34px]" />
@@ -104,15 +104,16 @@ const PremiumDetails = () => {
             </span>
           </p>
           <div
-            id="verification"
+            id="premium"
             className="flex flex-wrap max-w-[640px] w-full justify-between sm:gap-y-[14px] gap-y-[27px] gap-x-[20px] sm:pt-[56px] pt-[27px] pb-[62px] mx-auto"
           >
             {permiumDetails.map((i, index) => (
               <div
+                id="premium"
                 key={index + "premiumDetails"}
                 className={` ${i.className2} sm:pt-[15px] pb-[41px] pl-[16px] pr-[10px] sm:max-w-[200px] max-w-[331px] w-full border-[1px] border-solid border-[#EEE] rounded-[5px] h-[220px] md:mx-0 mx-auto`}
               >
-                <div className="mx-auto w-fit">
+                <div className="mx-auto w-fit" id="premium">
                   <img src={i.src} alt="" />
                 </div>
                 <h1 className="Montserrat700 text-center text-[14px] font-[700] leading-normal text-[#262F61] mt-[14.5px]">
